@@ -3,10 +3,7 @@ package ru.grigan.job4j_forum.repository;
 import org.springframework.stereotype.Repository;
 import ru.grigan.job4j_forum.model.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
@@ -37,5 +34,14 @@ public class UserDAO implements DAO<User> {
     @Override
     public void deleteById(int id) {
         users.remove(id);
+    }
+
+    public User findByName(String username) {
+        for (User user : users.values()) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        throw new NoSuchElementException("User with username : " + username + " not found!");
     }
 }

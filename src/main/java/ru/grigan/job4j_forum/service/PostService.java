@@ -6,8 +6,6 @@ import ru.grigan.job4j_forum.model.User;
 import ru.grigan.job4j_forum.repository.PostDAO;
 import ru.grigan.job4j_forum.repository.UserDAO;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 @Service
@@ -34,8 +32,20 @@ public class PostService {
         return postDAO.getAll();
     }
 
+    public void savePost(Post post) {
+        postDAO.save(post);
+    }
+
+    public Post getPostById(int id) {
+        return postDAO.findById(id);
+    }
 
 
+    public User findUserByUsername(String username) {
+        return userDAO.findByName(username);
+    }
 
-
+    public void deletePostById(int id) {
+        postDAO.deleteById(id);
+    }
 }

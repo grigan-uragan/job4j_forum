@@ -75,4 +75,14 @@ public class Post {
     public int hashCode() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "Post{" + "id="
+                + id + ", name='"
+                + name + '\'' + ", description='"
+                + description + '\'' + ", created="
+                + created + ", user="
+                + user + '}';
+    }
 }

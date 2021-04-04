@@ -14,7 +14,7 @@
 <body>
 <div class="container mt-3">
     <div class="row">
-        <h1>Welcome Page</h1>
+        <h1>Welcome ${user.username}</h1>
     </div>
     <div class="row">
         <table class="table">
@@ -23,18 +23,32 @@
                 <th scope="col">Тема</th>
                 <th scope="col">Автор</th>
                 <th scope="col">Содержание</th>
+                <th scope="col">Редактировать</th>
+                <th scope="col">Удалить</th>
             </tr>
             </thead>
             <tbody>
+
             <c:forEach var="post" items="${posts}">
+                <c:url var="updateButton" value="/updatePost">
+                    <c:param name="postId" value="${post.id}"/>
+                </c:url>
+                <c:url var="deleteButton" value="/deletePost">
+                    <c:param name="postId" value="${post.id}"/>
+                </c:url>
                 <tr>
                     <td><c:out value="${post.name}"/></td>
                     <td><c:out value="${post.user.username}"/></td>
                     <td><c:out value="${post.description}"/></td>
+                    <td><input type="button" value="update" onclick="window.location.href ='${updateButton}'"></td>
+                    <td><input type="button" value="delete" onclick="window.location.href ='${deleteButton}'"></td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
+        <div>
+            <input type="button" value="add" onclick="window.location.href ='/addPost'">
+        </div>
     </div>
 
 </div>
