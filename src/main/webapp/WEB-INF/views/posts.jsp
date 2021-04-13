@@ -14,7 +14,6 @@
 <body>
 <div class="container mt-3">
     <div class="row">
-        <h1>Welcome ${user.username}</h1>
     </div>
     <div class="row">
         <table class="table">
@@ -22,6 +21,7 @@
             <tr>
                 <th scope="col">Тема</th>
                 <th scope="col">Автор</th>
+                <th scope="col">Дата</th>
                 <th scope="col">Содержание</th>
                 <th scope="col">Редактировать</th>
                 <th scope="col">Удалить</th>
@@ -39,6 +39,7 @@
                 <tr>
                     <td><c:out value="${post.topic}"/></td>
                     <td><c:out value="${post.user.username}"/></td>
+                    <td><c:out value="${post.created.time}"/></td>
                     <td><c:out value="${post.text}"/></td>
                     <td><input type="button" value="update" onclick="window.location.href ='${updateButton}'"></td>
                     <td><input type="button" value="delete" onclick="window.location.href ='${deleteButton}'"></td>

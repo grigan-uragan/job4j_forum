@@ -1,12 +1,19 @@
 package ru.grigan.job4j.forum.model;
 
+import javax.persistence.*;
 import java.util.Calendar;
 
+@Entity
+@Table(name = "posts")
 public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String topic;
     private String text;
     private Calendar created;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     public int getId() {

@@ -2,52 +2,40 @@ package ru.grigan.job4j.forum.service;
 
 import org.springframework.stereotype.Service;
 import ru.grigan.job4j.forum.model.Post;
-import ru.grigan.job4j.forum.model.User;
-import ru.grigan.job4j.forum.repository.PostDAO;
-import ru.grigan.job4j.forum.repository.UserDAO;
+import ru.grigan.job4j.forum.repository.PostRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class PostService {
-    private PostDAO postDAO;
-    private UserDAO userDAO;
+    private final PostRepository postRepository;
 
-    public PostService(PostDAO postDAO, UserDAO userDAO) {
-        this.postDAO = postDAO;
-        this.userDAO = userDAO;
-        init();
-    }
-
-    private void init() {
-        User user = User.of("user", "qwerty");
-        Post post = Post.of("what about BMW", "Simple talk about BMW");
-        user.addPost(post);
-        post.setUser(user);
-        postDAO.save(post);
-        userDAO.save(user);
+    public PostService(PostRepository postRepository) {
+        this.postRepository = postRepository;
     }
 
     public List<Post> allPosts() {
-        return postDAO.getAll();
+        List<Post> posts = new ArrayList<>();
+        postRepository.findAll().forEach(posts::add);
+        return posts;
     }
 
     public void savePost(Post post) {
-        postDAO.save(post);
+        postRepository.save(post);
     }
 
     public Post getPostById(int id) {
-        return postDAO.findById(id);
-    }
-
-    public User findUserByUsername(String username) {
-        return userDAO.findByName(username);
+        return postRepository.findById(id).orElseThrow(
+                () -> new NoSuchElementException("Post with id = " + id + " not found")
+        );
     }
 
     public void deletePostById(int id) {
-        postDAO.deleteById(id);
+        postRepository.deleteById(id);
     }
 
     public Set<String> getAllTopics() {

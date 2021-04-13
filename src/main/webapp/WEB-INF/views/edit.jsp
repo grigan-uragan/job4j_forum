@@ -8,9 +8,9 @@
 
 <form:form action="savePost" modelAttribute="post" method="post">
     <form:hidden path="id"/>
-    Name <form:input path="name"/>
+    Name <form:input path="topic"/>
     <br>
-    Description <form:textarea path="description"/>
+    Description <form:textarea path="text"/>
     <br>
     <input type="submit" value="ok">
 </form:form>

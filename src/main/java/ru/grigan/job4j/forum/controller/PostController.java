@@ -11,14 +11,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.grigan.job4j.forum.model.Post;
 import ru.grigan.job4j.forum.service.PostService;
+import ru.grigan.job4j.forum.service.UserService;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
 @Controller
 public class PostController {
-    @Autowired
-    private PostService service;
+    private final PostService postService;
+    private final UserService userService;
+
+    public PostController(PostService postService, UserService userService) {
+        this.postService = postService;
+        this.userService = userService;
+    }
 
     @GetMapping("/addPost")
     public String addPost(Model model) {
@@ -31,34 +38,35 @@ public class PostController {
     public String savePost(@ModelAttribute("post") Post post) {
         User user = (User) SecurityContextHolder
                 .getContext().getAuthentication().getPrincipal();
-        post.setUser(service.findUserByUsername(user.getUsername()));
-        service.savePost(post);
+        post.setUser(userService.findUserByUsername(user.getUsername()));
+        post.setCreated(Calendar.getInstance());
+        postService.savePost(post);
         return "redirect:/index";
     }
 
     @GetMapping("/updatePost")
     public String updatePost(@RequestParam("postId") int id, Model model) {
-        Post postById = service.getPostById(id);
+        Post postById = postService.getPostById(id);
         model.addAttribute("post", postById);
         return "edit";
     }
 
     @GetMapping("/deletePost")
     public String deletePost(@RequestParam("postId") int id) {
-        service.deletePostById(id);
+        postService.deletePostById(id);
         return "redirect:/";
     }
 
     @GetMapping("/topics")
     public String getAllTopic(Model model) {
-        Set<String> topics = service.getAllTopics();
+        Set<String> topics = postService.getAllTopics();
         model.addAttribute("topics", topics);
         return "topicList";
     }
 
     @GetMapping("/getTopic")
     public String getTopic(@RequestParam("topic") String topic, Model model) {
-        List<Post> posts = service.getPostByTopic(topic);
+        List<Post> posts = postService.getPostByTopic(topic);
         model.addAttribute("posts", posts);
         return "posts";
     }
