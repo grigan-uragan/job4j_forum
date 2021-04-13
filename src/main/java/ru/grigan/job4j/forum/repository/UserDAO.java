@@ -1,7 +1,7 @@
-package ru.grigan.job4j_forum.repository;
+package ru.grigan.job4j.forum.repository;
 
 import org.springframework.stereotype.Repository;
-import ru.grigan.job4j_forum.model.User;
+import ru.grigan.job4j.forum.model.User;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;

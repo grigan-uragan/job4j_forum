@@ -14,32 +14,33 @@
 <body>
 <div class="container mt-3">
     <div class="row">
-        <div class="col">
-            <h1>Welcome ${user.username}</h1>
-        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Тема</th>
+            </tr>
+            </thead>
+            <tbody>
 
-        <div class="col">
-            <h3>Let's write your post!</h3>
-        </div>
-
-
-        <div>
-            <input type="button" value="add" onclick="window.location.href ='/addPost'">
-        </div>
-    </div>
-    <div class="row">
-        <a href="<c:url value='/topics'/>">Look more interesting topics</a>
+            <c:forEach var="topic" items="${topics}">
+                <c:url var="topicLink" value="/getTopic">
+                    <c:param name="topic" value="${topic}"/>
+                </c:url>
+                <tr>
+                    <td><a href="${topicLink}"><c:out value="${topic}"/></a></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
     </div>
 
 </div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>

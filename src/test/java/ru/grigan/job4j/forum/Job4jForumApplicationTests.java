@@ -1,4 +1,4 @@
-package ru.grigan.job4j_forum;
+package ru.grigan.job4j.forum;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

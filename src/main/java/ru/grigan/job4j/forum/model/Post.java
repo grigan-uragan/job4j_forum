@@ -1,11 +1,11 @@
-package ru.grigan.job4j_forum.model;
+package ru.grigan.job4j.forum.model;
 
 import java.util.Calendar;
 
 public class Post {
     private int id;
-    private String name;
-    private String description;
+    private String topic;
+    private String text;
     private Calendar created;
     private User user;
 
@@ -17,20 +17,20 @@ public class Post {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTopic() {
+        return topic;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
-    public String getDescription() {
-        return description;
+    public String getText() {
+        return text;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public Calendar getCreated() {
@@ -49,10 +49,10 @@ public class Post {
         this.user = user;
     }
 
-    public static Post of(String name, String description) {
+    public static Post of(String topic, String text) {
         Post post = new Post();
-        post.setName(name);
-        post.setDescription(description);
+        post.setTopic(topic);
+        post.setText(text);
         post.setCreated(Calendar.getInstance());
         return post;
     }
@@ -80,8 +80,8 @@ public class Post {
     public String toString() {
         return "Post{" + "id="
                 + id + ", name='"
-                + name + '\'' + ", description='"
-                + description + '\'' + ", created="
+                + topic + '\'' + ", topic='"
+                + text + '\'' + ", text="
                 + created + ", user="
                 + user + '}';
     }

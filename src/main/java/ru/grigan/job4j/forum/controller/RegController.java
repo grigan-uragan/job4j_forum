@@ -1,12 +1,12 @@
-package ru.grigan.job4j_forum.controller;
+package ru.grigan.job4j.forum.controller;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.grigan.job4j_forum.model.User;
-import ru.grigan.job4j_forum.repository.UserDAO;
+import ru.grigan.job4j.forum.model.User;
+import ru.grigan.job4j.forum.repository.UserDAO;
 
 @Controller
 public class RegController {

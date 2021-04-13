@@ -1,4 +1,4 @@
-package ru.grigan.job4j_forum.repository;
+package ru.grigan.job4j.forum.repository;
 
 import java.util.List;
 

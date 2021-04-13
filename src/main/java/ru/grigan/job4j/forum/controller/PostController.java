@@ -1,4 +1,4 @@
-package ru.grigan.job4j_forum.controller;
+package ru.grigan.job4j.forum.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.grigan.job4j_forum.model.Post;
-import ru.grigan.job4j_forum.service.PostService;
+import ru.grigan.job4j.forum.model.Post;
+import ru.grigan.job4j.forum.service.PostService;
+
+import java.util.List;
+import java.util.Set;
 
 @Controller
 public class PostController {
@@ -44,5 +47,19 @@ public class PostController {
     public String deletePost(@RequestParam("postId") int id) {
         service.deletePostById(id);
         return "redirect:/";
+    }
+
+    @GetMapping("/topics")
+    public String getAllTopic(Model model) {
+        Set<String> topics = service.getAllTopics();
+        model.addAttribute("topics", topics);
+        return "topicList";
+    }
+
+    @GetMapping("/getTopic")
+    public String getTopic(@RequestParam("topic") String topic, Model model) {
+        List<Post> posts = service.getPostByTopic(topic);
+        model.addAttribute("posts", posts);
+        return "posts";
     }
 }

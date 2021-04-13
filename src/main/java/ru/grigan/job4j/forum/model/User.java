@@ -1,4 +1,4 @@
-package ru.grigan.job4j_forum.model;
+package ru.grigan.job4j.forum.model;
 
 import java.util.ArrayList;
 import java.util.List;

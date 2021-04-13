@@ -1,4 +1,4 @@
-package ru.grigan.job4j_forum.controller;
+package ru.grigan.job4j.forum.controller;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

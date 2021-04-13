@@ -1,4 +1,4 @@
-package ru.grigan.job4j_forum.config;
+package ru.grigan.job4j.forum.config;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

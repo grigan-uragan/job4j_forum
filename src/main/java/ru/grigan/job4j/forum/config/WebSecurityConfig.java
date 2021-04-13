@@ -1,4 +1,4 @@
-package ru.grigan.job4j_forum.config;
+package ru.grigan.job4j.forum.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(encoder)
                 .withUser("user").password(encoder.encode("qwerty")).roles("USER")
                 .and()
-                .withUser("admin").password(encoder.encode("admin")).roles("ADMIN");
+                .withUser("admin").password(encoder.encode("admin")).roles("ADMIN", "USER");
     }
 
     @Override
