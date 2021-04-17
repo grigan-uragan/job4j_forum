@@ -20,7 +20,8 @@ public class IndexController {
                 .getContext()
                 .getAuthentication()
                 .getPrincipal());
-        return "index";
+        model.addAttribute("title", "Main Page");
+        return "main";
     }
 
 }

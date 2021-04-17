@@ -5,10 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.grigan.job4j.forum.model.Post;
 import ru.grigan.job4j.forum.service.PostService;
 import ru.grigan.job4j.forum.service.UserService;
@@ -31,6 +28,7 @@ public class PostController {
     public String addPost(Model model) {
         Post post = new Post();
         model.addAttribute("post", post);
+        model.addAttribute("title", "Edit post");
         return "edit";
     }
 
@@ -48,6 +46,7 @@ public class PostController {
     public String updatePost(@RequestParam("postId") int id, Model model) {
         Post postById = postService.getPostById(id);
         model.addAttribute("post", postById);
+        model.addAttribute("title", "Edit post");
         return "edit";
     }
 
@@ -61,13 +60,15 @@ public class PostController {
     public String getAllTopic(Model model) {
         Set<String> topics = postService.getAllTopics();
         model.addAttribute("topics", topics);
+        model.addAttribute("title", "Topics");
         return "topicList";
     }
 
-    @GetMapping("/getTopic")
-    public String getTopic(@RequestParam("topic") String topic, Model model) {
+    @GetMapping("/getTopic/{topic}")
+    public String getTopic(@PathVariable("topic") String topic, Model model) {
         List<Post> posts = postService.getPostByTopic(topic);
         model.addAttribute("posts", posts);
+        model.addAttribute("title", "Posts");
         return "posts";
     }
 }

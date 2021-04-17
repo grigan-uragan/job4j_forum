@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/index}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="replace_fragment">
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Тема</th>
+                <th scope="col">Автор</th>
+                <th scope="col">Дата</th>
+                <th scope="col">Содержание</th>
+                <th scope="col">Редактировать</th>
+                <th scope="col">Удалить</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+                <tr th:each="post : ${posts}">
+                    <td th:text="${post.topic}"></td>
+                    <td th:text="${post.user.username}"></td>
+                    <td th:text="${post.created.time}"></td>
+                    <td th:text="${post.text}"></td>
+                    <td> <a class="btn btn-info" th:href="@{/updatePost/{id}(id = ${post.id})}">update</a></td>
+                    <td><a class="btn btn-info" th:href="@{/deletePost/{id}(id = ${post.id})}">delete </a></td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <a th:href="@{/addPost}"></a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -28,6 +28,7 @@ public class LoginController {
             errorMessage = "You have been successfully logged out !!";
         }
         model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("title", "Login Page");
         return "login";
     }
 

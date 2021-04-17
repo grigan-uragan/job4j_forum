@@ -2,6 +2,7 @@ package ru.grigan.job4j.forum.controller;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,8 @@ public class RegController {
     }
 
     @GetMapping("/reg")
-    public String registration(@ModelAttribute User user) {
+    public String registration(@ModelAttribute User user, Model model) {
+        model.addAttribute("user", user);
         return "reg";
     }
 }
