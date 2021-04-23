@@ -4,8 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/index}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
 </head>
 <body>
 <div layout:fragment="replace_fragment">
@@ -24,7 +23,7 @@
             <tbody>
 
 
-                <tr th:each="post : ${posts}">
+                <tr th:each="post : ${posts}" id="post-el">
                     <td th:text="${post.topic}"></td>
                     <td th:text="${post.user.username}"></td>
                     <td th:text="${post.created.time}"></td>

@@ -4,8 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/index}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
 </head>
 <body>
 <div layout:fragment="replace_fragment">
@@ -17,7 +16,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="topic : ${topics}">
+            <tr th:each="topic : ${topics}" id="topic-el">
                 <td><a th:href="@{/getTopic/{topic}(topic = ${topic})}" th:text="${topic}"></a></td>
             </tr>
             </tbody>

@@ -41,16 +41,16 @@ public class PostController {
         return "redirect:/index";
     }
 
-    @GetMapping("/updatePost")
-    public String updatePost(@RequestParam("postId") int id, Model model) {
+    @GetMapping("/updatePost/{postId}")
+    public String updatePost(@PathVariable("postId") int id, Model model) {
         Post postById = postService.getPostById(id);
         model.addAttribute("post", postById);
         model.addAttribute("title", "Edit post");
         return "edit";
     }
 
-    @GetMapping("/deletePost")
-    public String deletePost(@RequestParam("postId") int id) {
+    @GetMapping("/deletePost/{postId}")
+    public String deletePost(@PathVariable("postId") int id) {
         postService.deletePostById(id);
         return "redirect:/";
     }
