@@ -1,28 +1,27 @@
 package ru.grigan.job4j.forum.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
     private PasswordEncoder encoder;
-
-    public WebSecurityConfig(PasswordEncoder encoder) {
-        this.encoder = encoder;
-    }
+    @Qualifier("userService")
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .passwordEncoder(encoder)
-                .withUser("user").password(encoder.encode("qwerty")).roles("USER")
-                .and()
-                .withUser("admin").password(encoder.encode("admin")).roles("ADMIN", "USER");
+        auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
     }
 
     @Override

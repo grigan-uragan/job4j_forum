@@ -7,10 +7,8 @@ import org.springframework.stereotype.Service;
 import ru.grigan.job4j.forum.model.User;
 import ru.grigan.job4j.forum.repository.UserRepository;
 
-import java.util.NoSuchElementException;
-
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     private UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
@@ -18,8 +16,11 @@ public class UserService {
     }
 
     public User findUserByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(
-                () -> new NoSuchElementException("User with username = " + username + " not found!")
-        );
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return userRepository.findByUsername(s);
     }
 }

@@ -1,12 +1,11 @@
 package ru.grigan.job4j.forum.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.grigan.job4j.forum.model.Post;
+import ru.grigan.job4j.forum.model.User;
 import ru.grigan.job4j.forum.service.PostService;
 import ru.grigan.job4j.forum.service.UserService;
 

@@ -1,12 +1,17 @@
 package ru.grigan.job4j.forum.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -14,6 +19,11 @@ public class User {
     private String password;
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
+
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
 
     public int getId() {
         return id;
@@ -47,6 +57,14 @@ public class User {
         this.posts = posts;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     public void addPost(Post post) {
         if (posts == null) {
             posts = new ArrayList<>();
@@ -62,30 +80,27 @@ public class User {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        User user = (User) o;
-
-        return id == user.id;
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
     }
 
     @Override
-    public int hashCode() {
-        return id;
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
     @Override
-    public String toString() {
-        return "User{" + "id="
-                + id + ", username='"
-                + username + '\'' + ", password='"
-                + password + '\'' + ", posts="
-                + posts + '}';
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
