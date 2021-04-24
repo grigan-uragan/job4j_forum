@@ -21,7 +21,7 @@ class IndexControllerTest {
     @Test
     @WithMockUser
     public void shouldReturnGreetingMessage() throws Exception {
-        mockMvc.perform(get("/"))
+        this.mockMvc.perform(get("/"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("main"))

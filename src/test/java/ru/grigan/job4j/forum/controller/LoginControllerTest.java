@@ -21,7 +21,7 @@ class LoginControllerTest {
 
     @Test
     public void whenQuestGoToAnyPathThenRedirectionOnLoginPage() throws Exception {
-        mockMvc.perform(get("/"))
+        this.mockMvc.perform(get("/"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("http://localhost/login"));
@@ -30,7 +30,7 @@ class LoginControllerTest {
     @WithMockUser
     @Test
     public void whenUserLogoutThenRedirectWithMessage() throws Exception {
-        mockMvc.perform(get("/logout"))
+        this.mockMvc.perform(get("/logout"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/login?logout=true"));

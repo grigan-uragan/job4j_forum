@@ -7,22 +7,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.grigan.job4j.forum.model.User;
-import ru.grigan.job4j.forum.repository.UserRepository;
+import ru.grigan.job4j.forum.service.UserService;
 
 @Controller
 public class RegController {
     private final PasswordEncoder encoder;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public RegController(PasswordEncoder encoder, UserRepository userRepository) {
+    public RegController(PasswordEncoder encoder, UserService userService) {
         this.encoder = encoder;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @PostMapping("/reg")
     public String save(@ModelAttribute User user) {
         user.setPassword(encoder.encode(user.getPassword()));
-        userRepository.save(user);
+        userService.saveUser(user);
         return "redirect:/login";
     }
 

@@ -28,7 +28,7 @@ class PostControllerTest {
 
     @Test
     public void shouldReturnEditViewAndEditPostTitle() throws Exception {
-        mockMvc.perform(get("/addPost"))
+        this.mockMvc.perform(get("/addPost"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("edit"))
@@ -37,7 +37,7 @@ class PostControllerTest {
 
     @Test
     public void whenUpdatePostThenReturnViewEditAndEditPostTitle() throws Exception {
-        mockMvc.perform(get("/updatePost/1"))
+        this.mockMvc.perform(get("/updatePost/1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("edit"))
@@ -46,14 +46,14 @@ class PostControllerTest {
 
     @Test
     public void whenDeletePostThenRedirect() throws Exception {
-        mockMvc.perform(get("/deletePost/1"))
+        this.mockMvc.perform(get("/deletePost/1"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection());
     }
 
     @Test
     public void shouldReturnListTopicsWith2Element() throws Exception {
-        mockMvc.perform(get("/topics"))
+        this.mockMvc.perform(get("/topics"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("topicList"))
@@ -63,12 +63,14 @@ class PostControllerTest {
 
     @Test
     public void shouldReturnPostListWith3Element() throws Exception {
-        mockMvc.perform(get("/getTopic/topic"))
+        this.mockMvc.perform(get("/getTopic/topic"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("posts"))
                 .andExpect(xpath("//tr[@id='post-el']").exists())
                 .andExpect(xpath("//tr[@id='post-el']").nodeCount(3));
     }
+
+
 
 }
