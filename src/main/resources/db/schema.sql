@@ -4,6 +4,12 @@ create table users (
   password varchar(255)
 );
 
+create table user_role
+(
+    user_id int not null,
+    roles   varchar(255)
+);
+
 create table posts (
     id serial primary key,
     topic text,
@@ -11,6 +17,3 @@ create table posts (
     user_id int references users(id),
     created timestamp with time zone not null default now()
 );
-
-insert into users(username, password)
-values ('admin', '$2a$10$7qX6xiYDse27lZczzcG1fOkm/OcK1p4v8E2ne/3CBG25rGFuMg80C');
